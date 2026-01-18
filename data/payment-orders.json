@@ -228,5 +228,27 @@
     "remarks": "电子元器件补充付款",
     "createdAt": "2025-01-27T08:30:00.000Z",
     "updatedAt": "2025-01-27T09:00:00.000Z"
+  },
+  {
+    "id": "1768740215963-1ifixtg",
+    "orderNo": "FK202601183TQ0",
+    "requestId": "1768740188005-gyyagwd",
+    "payableId": "",
+    "supplierId": "sup-002",
+    "supplierName": "联想（北京）有限公司",
+    "paymentAmount": 120000,
+    "paymentMethod": "bank_transfer",
+    "bankAccount": "",
+    "bankName": "",
+    "paymentDate": "2026-01-18",
+    "status": "completed",
+    "verifiedAmount": 0,
+    "unverifiedAmount": 120000,
+    "verificationStatus": "unverified",
+    "completedAt": "2026-01-18T12:43:35.963Z",
+    "transactionNo": "TXN1768740215963",
+    "remarks": "",
+    "createdAt": "2026-01-18T12:43:35.963Z",
+    "updatedAt": "2026-01-18T12:43:35.963Z"
   }
 ]

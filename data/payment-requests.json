@@ -58,5 +58,26 @@
     "status": "draft",
     "createdAt": "2025-01-18T15:00:00.000Z",
     "updatedAt": "2025-01-18T15:00:00.000Z"
+  },
+  {
+    "id": "1768740188005-gyyagwd",
+    "requestNo": "QK20260118NEZS",
+    "payableIds": [],
+    "invoiceIds": [],
+    "purchaseOrderId": "po-002",
+    "supplierId": "sup-002",
+    "supplierName": "联想（北京）有限公司",
+    "requestAmount": 120000,
+    "paidAmount": 120000,
+    "unpaidAmount": 0,
+    "requestReason": "预付请款: PO20240118B2",
+    "status": "paid",
+    "createdAt": "2026-01-18T12:43:08.005Z",
+    "updatedAt": "2026-01-18T12:43:35.963Z",
+    "submittedAt": "2026-01-18T12:43:23.599Z",
+    "submittedBy": "当前用户",
+    "approvedAt": "2026-01-18T12:43:30.026Z",
+    "approvedBy": "当前用户",
+    "approvalRemarks": ""
   }
 ]

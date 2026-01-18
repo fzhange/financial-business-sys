@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { 
   readJsonFile, writeJsonFile, generateId, generateNo, now, 
   PaymentRequest, PaymentOrder, AccountsPayable, Invoice, VerificationRecord,
-  PaymentOrderVerificationDetail, InvoiceVerificationDetail
+  PaymentOrderVerificationDetail, InvoiceVerificationDetail, PurchaseOrder
 } from '@/lib/db';
 
 const REQUESTS_FILE = 'payment-requests.json';

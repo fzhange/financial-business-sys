@@ -35,9 +35,9 @@
     "orderDate": "2024-01-18",
     "totalAmount": 120000,
     "type": "prepaid",
-    "paymentStatus": "unpaid",
-    "paidAmount": 0,
-    "unpaidAmount": 120000,
+    "paymentStatus": "paid",
+    "paidAmount": 120000,
+    "unpaidAmount": 0,
     "inboundStatus": "pending",
     "status": "confirmed",
     "items": [
@@ -53,6 +53,6 @@
       }
     ],
     "createdAt": "2024-01-18T11:00:00.000Z",
-    "updatedAt": "2024-01-18T11:00:00.000Z"
+    "updatedAt": "2026-01-18T12:43:35.963Z"
   }
 ]
