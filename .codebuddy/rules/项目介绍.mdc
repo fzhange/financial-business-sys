@@ -1,0 +1,14 @@
+---
+description: 
+alwaysApply: true
+enabled: true
+updatedAt: 2026-01-17T11:46:34.237Z
+provider: 
+---
+
+- 这个项目是用来做”业务财务系统“的设计开发
+- 服务端部分，你直接使用next.js的api部分进行开发
+- DB使用本地的 JSON file 来模拟
+- 如果需要安装依赖，可以使用 npm install
+- 使用中文
+
