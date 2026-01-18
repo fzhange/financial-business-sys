@@ -377,8 +377,7 @@ export default function PaymentRequestsPage() {
                   <TableCell className="font-medium">{req.requestNo}</TableCell>
                   <TableCell>{req.supplierName}</TableCell>
                   <TableCell className="text-right">¥{req.requestAmount.toFixed(2)}</TableCell>
-                  <TableCell className="text-right">¥{(req.approvedAmount ?? 0).toFixed(2)}</TableCell>
-                  <TableCell>{req.applicant || '-'}</TableCell>
+                  <TableCell>{req.submittedBy || '-'}</TableCell>
                   <TableCell>
                     <Badge variant={statusMap[req.status]?.variant || 'outline'}>
                       {statusMap[req.status]?.label}
