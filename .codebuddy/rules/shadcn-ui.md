@@ -145,6 +145,38 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 </Card>
 ```
 
+## Modal/Dialog 宽度规范
+
+**重要：本项目所有 Modal/Dialog 弹窗统一使用 85vw 宽度。**
+
+Dialog 组件（`components/ui/dialog.tsx`）已配置默认宽度：
+
+```tsx
+// DialogContent 默认样式
+w-[85vw] max-w-[85vw] max-h-[90vh] overflow-y-auto
+```
+
+### 使用说明
+
+1. **直接使用** - 无需额外指定宽度，组件默认为 85vw
+2. **高度限制** - 最大高度 90vh，超出自动滚动
+3. **不要覆盖宽度** - 保持系统统一性，禁止在各页面单独设置 Dialog 宽度
+
+### 示例
+
+```tsx
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+
+<Dialog open={open} onOpenChange={setOpen}>
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle>标题</DialogTitle>
+    </DialogHeader>
+    {/* 内容 */}
+  </DialogContent>
+</Dialog>
+```
+
 ## 最佳实践
 
 1. **优先使用 shadcn/ui 组件** - 保持 UI 一致性
@@ -152,6 +184,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 3. **使用 cn() 合并类名** - 避免类名冲突
 4. **遵循 Tailwind CSS 规范** - 使用预定义的设计令牌
 5. **保持深色模式兼容** - 使用 CSS 变量而非硬编码颜色
+6. **Modal 宽度统一 85vw** - 不要在页面中覆盖 Dialog 宽度
 
 ## 相关链接
 

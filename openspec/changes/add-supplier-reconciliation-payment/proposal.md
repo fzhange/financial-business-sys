@@ -16,11 +16,10 @@
 - Affected specs: 
   - `purchase-record` - 采购入库/退货记录
   - `supplier-statement` - 供应商对账单
-  - `accounts-payable` - 应付账款
+  - `accounts-payable` - 应付账款（含三单核销）
   - `invoice-management` - 发票管理
   - `payment-request` - 请款管理
   - `payment-order` - 付款单
-  - `write-off` - 核销管理
 - Affected code: 
   - `app/api/` - 后端 API 接口
   - `app/` - 前端页面组件

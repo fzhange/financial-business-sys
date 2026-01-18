@@ -81,10 +81,15 @@ interface SupplierStatement {
   netAmount: number;            // 净额（入库-退货）
   supplierAmount: number;       // 供应商对账金额
   differenceAmount: number;     // 差异金额
-  status: 'draft' | 'pending_confirm' | 'disputed' | 'confirmed';
-  // 草稿 | 待确认 | 有争议 | 已确认
-  confirmedAt?: string;
-  confirmedBy?: string;
+  status: 'draft' | 'pending_supplier_confirm' | 'disputed' | 'pending_buyer_confirm' | 'confirmed';
+  // 草稿 | 待供应商确认 | 有争议 | 待采购方确认 | 已确认
+  // 供应商确认（先）
+  supplierConfirmed: boolean;   // 供应商是否已确认
+  supplierConfirmedAt?: string; // 供应商确认时间
+  // 采购方确认（后）
+  buyerConfirmed: boolean;      // 采购方是否已确认
+  buyerConfirmedAt?: string;    // 采购方确认时间
+  buyerConfirmedBy?: string;    // 采购方确认人
   remarks?: string;
   createdAt: string;
   updatedAt: string;
@@ -101,15 +106,25 @@ interface AccountsPayable {
   supplierName: string;         // 供应商名称
   payableAmount: number;        // 应付金额
   paidAmount: number;           // 已付金额
-  remainingAmount: number;      // 未付金额
-  status: 'unpaid' | 'partial_paid' | 'paid' | 'written_off';
-  // 未付款 | 部分付款 | 已付款 | 已核销
+  unpaidAmount: number;         // 未付金额 = 应付金额 - 已付金额
+  invoicedAmount: number;       // 已开票金额
+  verifiedAmount: number;       // 已核销金额
+  unverifiedAmount: number;     // 未核销金额 = 应付金额 - 已核销金额
+  paymentStatus: 'unpaid' | 'partial_paid' | 'paid';
+  // 付款状态：未付款 | 部分付款 | 已付款
+  verificationStatus: 'unverified' | 'partial_verified' | 'verified';
+  // 核销状态：未核销 | 部分核销 | 已核销
   dueDate: string;              // 到期日
-  invoiceIds: string[];         // 关联发票ID
   createdAt: string;
   updatedAt: string;
 }
 ```
+
+**三单匹配核销说明：**
+- **三单**：应付账款、付款记录、发票
+- **核销规则**：三者金额匹配后，由财务人员手动确认核销
+- **核销时机**：付款和开票顺序不限，只要金额匹配即可
+- **核销粒度**：支持部分核销，可多次核销
 
 #### 4. 发票 (Invoice)
 ```typescript
@@ -139,6 +154,11 @@ interface Invoice {
   unusableReason?: string;      // 不可用原因（不可用时必填）
   verifiedAt?: string;          // 校验时间
   verifiedBy?: string;          // 校验人
+  // 核销相关字段
+  verifiedAmount: number;       // 已核销金额
+  unverifiedAmount: number;     // 未核销金额 = totalAmount - verifiedAmount
+  verificationStatus: 'unverified' | 'partial_verified' | 'verified';
+  // 核销状态：未核销 | 部分核销 | 已核销
   remarks?: string;
   createdAt: string;
   updatedAt: string;
@@ -164,6 +184,8 @@ interface PaymentRequest {
   supplierId: string;           // 供应商ID
   supplierName: string;         // 供应商名称
   requestAmount: number;        // 请款金额
+  paidAmount: number;           // 已付金额
+  unpaidAmount: number;         // 未付金额 = 请款金额 - 已付金额
   requestReason: string;        // 请款事由
   status: 'draft' | 'pending_approval' | 'approved' | 'rejected' | 'paid';
   // 草稿 | 待审批 | 已审批 | 已拒绝 | 已付款
@@ -176,6 +198,15 @@ interface PaymentRequest {
   updatedAt: string;
 }
 ```
+
+**请款单付款规则：**
+1. **付款入口**：仅"已审批"状态且 unpaidAmount > 0 的请款单显示"发起付款"按钮
+2. **付款金额**：付款金额 ≤ unpaidAmount（未付金额）
+3. **部分付款**：支持分多次付款，每次付款后更新 paidAmount 和 unpaidAmount
+4. **状态变更**：
+   - 部分付款后：状态保持"已审批"
+   - 全部付清后：状态变为"已付款"
+5. **无需审批**：付款操作无需二次审批，付款完成即生成付款单
 
 #### 6. 付款单 (PaymentOrder)
 ```typescript
@@ -192,32 +223,76 @@ interface PaymentOrder {
   bankAccount?: string;         // 收款账号
   bankName?: string;            // 收款银行
   paymentDate: string;          // 付款日期
-  status: 'pending' | 'processing' | 'completed' | 'failed';
-  // 待付款 | 付款中 | 已完成 | 付款失败
+  status: 'completed' | 'failed';
+  // 已完成 | 付款失败（付款完成后生成，无中间状态）
+  // 核销相关字段
+  verifiedAmount: number;       // 已核销金额
+  unverifiedAmount: number;     // 未核销金额 = paymentAmount - verifiedAmount
+  verificationStatus: 'unverified' | 'partial_verified' | 'verified';
+  // 核销状态：未核销 | 部分核销 | 已核销
   completedAt?: string;
   transactionNo?: string;       // 交易流水号
+  failureReason?: string;       // 失败原因（状态为failed时）
   remarks?: string;
   createdAt: string;
   updatedAt: string;
 }
 ```
 
-#### 7. 核销记录 (WriteOff)
+**付款单生成规则：**
+1. **生成时机**：付款完成后生成，不再有"待付款"、"付款中"等中间状态
+2. **状态说明**：
+   - `completed`：付款成功
+   - `failed`：付款失败，需记录失败原因
+3. **核销状态说明**：
+   - `unverified`：未核销（已核销金额 = 0）
+   - `partial_verified`：部分核销（0 < 已核销金额 < 付款金额）
+   - `verified`：已核销（已核销金额 = 付款金额）
+4. **无需审批**：基于已审批请款单付款，付款操作本身无需审批
+5. **联动更新**：付款成功后自动更新请款单和应付账款的已付金额
+
+#### 7. 核销记录 (VerificationRecord)
 ```typescript
-interface WriteOff {
+interface VerificationRecord {
   id: string;
-  writeOffNo: string;           // 核销单号
+  verificationNo: string;       // 核销单号
   payableId: string;            // 关联应付账款ID
   paymentOrderId: string;       // 关联付款单ID
-  writeOffAmount: number;       // 核销金额
-  writeOffDate: string;         // 核销日期
-  writeOffType: 'auto' | 'manual';  // 自动核销 | 手工核销
+  invoiceId: string;            // 关联发票ID
+  amount: number;               // 核销金额
+  verificationDate: string;     // 核销日期
+  verifiedBy: string;           // 核销人
+  verifiedAt: string;           // 核销时间
   status: 'completed' | 'reversed';  // 已完成 | 已冲销
   remarks?: string;
+  // 冲销相关字段
+  reversedAt?: string;          // 冲销时间
+  reversedBy?: string;          // 冲销人
+  reverseReasonType?: 'input_error' | 'business_change' | 'duplicate_verification' | 'invoice_return' | 'other';
+  // 冲销原因类型：录入错误 | 业务变更 | 重复核销 | 发票退回 | 其他
+  reverseReasonDetail?: string; // 冲销原因详细说明
   createdAt: string;
   updatedAt: string;
 }
 ```
+
+**核销业务规则：**
+1. **三单匹配**：核销时必须同时关联应付账款、付款单、发票
+2. **金额约束**：核销金额 ≤ min(该应付账款未核销付款金额, 该应付账款未核销发票金额)
+3. **手动操作**：核销需财务人员手动确认，选择付款记录 + 发票 + 金额
+4. **部分核销**：支持多次部分核销，直到应付账款全部核销完成
+5. **顺序无关**：付款和开票顺序不限，只要三者金额匹配即可核销
+
+**冲销业务规则：**
+1. **权限控制**：仅财务主管及以上角色可执行冲销操作
+2. **原因必填**：冲销时必须选择原因类型并填写详细说明（至少10个字符）
+3. **时间限制**：
+   - 当月内的核销可直接冲销
+   - 跨月核销需提交审批
+   - 已结账会计期间的核销禁止冲销
+4. **联动更新**：冲销后自动恢复发票、应付账款、付款单的未核销金额
+5. **不可重复**：已冲销的记录不可再次冲销
+6. **记录保留**：冲销后保留原核销记录，状态更新为"已冲销"
 
 ### API 设计
 
@@ -232,6 +307,9 @@ interface WriteOff {
 | 对账单 | `/api/supplier-statements/[id]/confirm` | POST | 确认 |
 | 应付账款 | `/api/accounts-payable` | GET/POST | 列表/新增 |
 | 应付账款 | `/api/accounts-payable/[id]` | GET/PUT | 详情/更新 |
+| 应付账款 | `/api/accounts-payable/[id]/verifications` | GET/POST | 核销记录列表/新增核销 |
+| 应付账款 | `/api/accounts-payable/[id]/verifications/[vid]` | GET | 核销记录详情 |
+| 应付账款 | `/api/accounts-payable/[id]/verifications/[vid]/reverse` | POST | 核销冲销 |
 | 发票 | `/api/invoices` | GET/POST | 列表/新增(含重复校验) |
 | 发票 | `/api/invoices/[id]` | GET/PUT/DELETE | 详情/更新/删除 |
 | 发票 | `/api/invoices/[id]/verify` | POST | 业务校验 |
@@ -245,8 +323,6 @@ interface WriteOff {
 | 付款单 | `/api/payment-orders` | GET/POST | 列表/新增 |
 | 付款单 | `/api/payment-orders/[id]` | GET/PUT | 详情/更新 |
 | 付款单 | `/api/payment-orders/[id]/complete` | POST | 完成付款 |
-| 核销 | `/api/write-offs` | GET/POST | 列表/新增 |
-| 核销 | `/api/write-offs/[id]` | GET | 详情 |
 
 ### 页面设计
 
@@ -254,11 +330,12 @@ interface WriteOff {
 |------|------|------|
 | 采购记录 | `/purchase-records` | 入库/退货记录列表 |
 | 对账单 | `/supplier-statements` | 对账单列表及管理 |
-| 应付账款 | `/accounts-payable` | 应付账款列表 |
+| 应付账款 | `/accounts-payable` | 应付账款列表（含核销操作） |
 | 发票管理 | `/invoices` | 发票录入和管理 |
 | 请款管理 | `/payment-requests` | 请款单列表和审批 |
 | 付款单 | `/payment-orders` | 付款单列表 |
-| 核销管理 | `/write-offs` | 核销记录和操作 |
+
+**注：** 三单核销功能集成在应付账款详情页，不单独设立核销管理模块。
 
 ## Risks / Trade-offs
 
@@ -285,11 +362,11 @@ interface WriteOff {
 - `data/invoices.json`
 - `data/payment-requests.json`
 - `data/payment-orders.json`
-- `data/write-offs.json`
+- `data/verifications.json` (核销记录，作为应付账款的子资源)
 - `data/suppliers.json` (基础数据)
 
 ## Open Questions
 
 1. 是否需要支持多币种？（当前假设：单一币种 CNY）
-2. 是否需要支持部分核销？（当前假设：支持）
+2. ~~是否需要支持部分核销？~~（**已确认：支持部分核销**）
 3. 付款审批流程是否需要多级审批？（当前假设：单级审批）
