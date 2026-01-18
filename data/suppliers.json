@@ -1,0 +1,47 @@
+[
+  {
+    "id": "sup-001",
+    "name": "深圳市华强电子有限公司",
+    "code": "HQ-001",
+    "contactPerson": "张经理",
+    "phone": "13800138001",
+    "email": "zhang@huaqiang.com",
+    "address": "深圳市福田区华强北路1号",
+    "bankName": "中国工商银行深圳华强支行",
+    "bankAccount": "4000123456789001",
+    "taxNo": "91440300MA5D12345X",
+    "status": "active",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "sup-002",
+    "name": "广州市天河科技有限公司",
+    "code": "TH-002",
+    "contactPerson": "李总",
+    "phone": "13900139002",
+    "email": "li@tianhe.com",
+    "address": "广州市天河区科技园区A座",
+    "bankName": "中国建设银行广州天河支行",
+    "bankAccount": "4400234567890002",
+    "taxNo": "91440106MA5E23456Y",
+    "status": "active",
+    "createdAt": "2024-01-02T00:00:00.000Z",
+    "updatedAt": "2024-01-02T00:00:00.000Z"
+  },
+  {
+    "id": "sup-003",
+    "name": "上海浦东物料供应商",
+    "code": "PD-003",
+    "contactPerson": "王主管",
+    "phone": "13700137003",
+    "email": "wang@pudong.com",
+    "address": "上海市浦东新区张江高科技园区",
+    "bankName": "中国银行上海浦东支行",
+    "bankAccount": "4500345678901003",
+    "taxNo": "91310115MA5F34567Z",
+    "status": "active",
+    "createdAt": "2024-01-03T00:00:00.000Z",
+    "updatedAt": "2024-01-03T00:00:00.000Z"
+  }
+]

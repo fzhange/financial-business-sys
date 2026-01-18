@@ -1,0 +1,58 @@
+[
+  {
+    "id": "po-001",
+    "orderNo": "PO20240118A1",
+    "supplierId": "sup-001",
+    "supplierName": "深圳市华强电子有限公司",
+    "orderDate": "2024-01-18",
+    "totalAmount": 50000,
+    "type": "standard",
+    "paymentStatus": "unpaid",
+    "paidAmount": 0,
+    "unpaidAmount": 50000,
+    "inboundStatus": "pending",
+    "status": "confirmed",
+    "items": [
+      {
+        "id": "poi-001",
+        "productCode": "P001",
+        "productName": "电子元器件A",
+        "specification": "100uF 25V",
+        "unit": "个",
+        "quantity": 1000,
+        "unitPrice": 50,
+        "amount": 50000
+      }
+    ],
+    "createdAt": "2024-01-18T10:00:00.000Z",
+    "updatedAt": "2024-01-18T10:00:00.000Z"
+  },
+  {
+    "id": "po-002",
+    "orderNo": "PO20240118B2",
+    "supplierId": "sup-002",
+    "supplierName": "联想（北京）有限公司",
+    "orderDate": "2024-01-18",
+    "totalAmount": 120000,
+    "type": "prepaid",
+    "paymentStatus": "unpaid",
+    "paidAmount": 0,
+    "unpaidAmount": 120000,
+    "inboundStatus": "pending",
+    "status": "confirmed",
+    "items": [
+      {
+        "id": "poi-002",
+        "productCode": "P002",
+        "productName": "笔记本电脑",
+        "specification": "ThinkPad X1",
+        "unit": "台",
+        "quantity": 10,
+        "unitPrice": 12000,
+        "amount": 120000
+      }
+    ],
+    "createdAt": "2024-01-18T11:00:00.000Z",
+    "updatedAt": "2024-01-18T11:00:00.000Z"
+  }
+]

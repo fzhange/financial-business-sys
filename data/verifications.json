@@ -1,0 +1,69 @@
+[
+  {
+    "id": "ver-001",
+    "verificationNo": "HX202501001",
+    "payableId": "ap-001",
+    "paymentOrderId": "po-001",
+    "paymentOrderIds": [
+      "po-001"
+    ],
+    "invoiceId": "inv-001",
+    "invoiceIds": [
+      "inv-001"
+    ],
+    "paymentOrderDetails": [
+      {
+        "paymentOrderId": "po-001",
+        "amount": 20000
+      }
+    ],
+    "invoiceDetails": [
+      {
+        "invoiceId": "inv-001",
+        "amount": 20000
+      }
+    ],
+    "amount": 20000,
+    "verificationDate": "2025-01-18",
+    "verifiedBy": "财务专员小李",
+    "verifiedAt": "2025-01-18T10:30:00.000Z",
+    "status": "completed",
+    "remarks": "三单核销完成",
+    "createdAt": "2025-01-18T10:30:00.000Z",
+    "updatedAt": "2025-01-18T10:30:00.000Z"
+  },
+  {
+    "id": "1768726238205-yskcnee",
+    "verificationNo": "HX20260118F4PL",
+    "payableId": "ap-006",
+    "paymentOrderId": "po-005",
+    "paymentOrderIds": [
+      "po-005",
+      "po-006"
+    ],
+    "invoiceId": "inv-006",
+    "invoiceIds": [
+      "inv-006",
+      "inv-007"
+    ],
+    "paymentOrderDetails": [
+      {
+        "paymentOrderId": "po-005",
+        "amount": 1231
+      }
+    ],
+    "invoiceDetails": [
+      {
+        "invoiceId": "inv-006",
+        "amount": 1231
+      }
+    ],
+    "amount": 1231,
+    "verificationDate": "2026-01-18",
+    "verifiedBy": "当前用户",
+    "verifiedAt": "2026-01-18T08:50:38.205Z",
+    "status": "completed",
+    "createdAt": "2026-01-18T08:50:38.205Z",
+    "updatedAt": "2026-01-18T08:50:38.205Z"
+  }
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "id": "preq-001",
+    "requestNo": "QK202501001",
+    "supplierId": "sup-001",
+    "supplierName": "深圳华强电子有限公司",
+    "payableIds": [
+      "ap-001"
+    ],
+    "invoiceIds": [
+      "inv-001"
+    ],
+    "requestAmount": 20000,
+    "paidAmount": 20000,
+    "unpaidAmount": 0,
+    "requestReason": "首批货款请款",
+    "status": "paid",
+    "createdAt": "2025-01-17T17:00:00.000Z",
+    "updatedAt": "2025-01-18T10:00:00.000Z"
+  },
+  {
+    "id": "preq-002",
+    "requestNo": "QK202501002",
+    "supplierId": "sup-001",
+    "supplierName": "深圳华强电子有限公司",
+    "payableIds": [
+      "ap-001"
+    ],
+    "invoiceIds": [
+      "inv-004"
+    ],
+    "requestAmount": 8725,
+    "paidAmount": 0,
+    "unpaidAmount": 8725,
+    "requestReason": "尾款请款",
+    "status": "approved",
+    "createdAt": "2025-01-18T14:00:00.000Z",
+    "updatedAt": "2026-01-18T11:58:51.603Z",
+    "approvedAt": "2026-01-18T11:58:51.603Z",
+    "approvedBy": "当前用户",
+    "approvalRemarks": ""
+  },
+  {
+    "id": "preq-003",
+    "requestNo": "QK202501003",
+    "supplierId": "sup-003",
+    "supplierName": "广州永盛贸易有限公司",
+    "payableIds": [
+      "ap-002"
+    ],
+    "invoiceIds": [
+      "inv-003"
+    ],
+    "requestAmount": 55000,
+    "paidAmount": 0,
+    "unpaidAmount": 55000,
+    "requestReason": "显示屏订单首款",
+    "status": "draft",
+    "createdAt": "2025-01-18T15:00:00.000Z",
+    "updatedAt": "2025-01-18T15:00:00.000Z"
+  }
+]

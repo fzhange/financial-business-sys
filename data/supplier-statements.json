@@ -1,0 +1,161 @@
+[
+  {
+    "id": "stmt-001",
+    "statementNo": "DZ202501001",
+    "supplierId": "sup-001",
+    "supplierName": "深圳华强电子有限公司",
+    "periodStart": "2025-01-01",
+    "periodEnd": "2025-01-15",
+    "purchaseRecordIds": [
+      "pr-001",
+      "pr-004"
+    ],
+    "totalPurchaseAmount": 53850,
+    "totalReturnAmount": 2680,
+    "netAmount": 51170,
+    "supplierAmount": 51170,
+    "supplierItems": [
+      {
+        "id": "si-001",
+        "itemNo": "XS202501001",
+        "itemDate": "2025-01-05",
+        "type": "sale",
+        "description": "电子元器件批发",
+        "amount": 53850
+      },
+      {
+        "id": "si-002",
+        "itemNo": "TH202501001",
+        "itemDate": "2025-01-10",
+        "type": "return",
+        "description": "次品退货",
+        "amount": 2680
+      }
+    ],
+    "differenceAmount": 0,
+    "status": "confirmed",
+    "supplierConfirmed": true,
+    "supplierConfirmedAt": "2025-01-16T10:00:00Z",
+    "buyerConfirmed": true,
+    "buyerConfirmedAt": "2025-01-16T14:00:00Z",
+    "buyerConfirmedBy": "张三",
+    "createdAt": "2025-01-15T08:00:00Z",
+    "updatedAt": "2025-01-16T14:00:00Z"
+  },
+  {
+    "id": "stmt-002",
+    "statementNo": "DZ202501002",
+    "supplierId": "sup-002",
+    "supplierName": "上海宏图科技股份有限公司",
+    "periodStart": "2025-01-01",
+    "periodEnd": "2025-01-15",
+    "purchaseRecordIds": [
+      "pr-002",
+      "pr-005"
+    ],
+    "totalPurchaseAmount": 188900,
+    "totalReturnAmount": 0,
+    "netAmount": 188900,
+    "status": "pending_supplier_confirm",
+    "supplierConfirmed": false,
+    "buyerConfirmed": false,
+    "remarks": "待发送给供应商确认",
+    "createdAt": "2025-01-15T09:00:00Z",
+    "updatedAt": "2026-01-18T08:15:28.061Z",
+    "differenceAmount": null
+  },
+  {
+    "id": "stmt-003",
+    "statementNo": "DZ202501003",
+    "supplierId": "sup-003",
+    "supplierName": "广州永盛贸易有限公司",
+    "periodStart": "2025-01-01",
+    "periodEnd": "2025-01-15",
+    "purchaseRecordIds": [
+      "pr-003"
+    ],
+    "totalPurchaseAmount": 66040,
+    "totalReturnAmount": 0,
+    "netAmount": 66040,
+    "status": "pending_supplier_confirm",
+    "supplierConfirmed": false,
+    "buyerConfirmed": false,
+    "remarks": "等待供应商提供对账单",
+    "createdAt": "2025-01-15T10:00:00Z",
+    "updatedAt": "2025-01-16T08:00:00Z"
+  },
+  {
+    "id": "stmt-004",
+    "statementNo": "DZ202501004",
+    "supplierId": "sup-001",
+    "supplierName": "深圳华强电子有限公司",
+    "periodStart": "2025-01-16",
+    "periodEnd": "2025-01-18",
+    "purchaseRecordIds": [
+      "pr-006"
+    ],
+    "totalPurchaseAmount": 25680,
+    "totalReturnAmount": 0,
+    "netAmount": 25680,
+    "supplierAmount": 26000,
+    "supplierItems": [
+      {
+        "id": "si-003",
+        "itemNo": "XS202501002",
+        "itemDate": "2025-01-17",
+        "type": "sale",
+        "description": "电子配件销售",
+        "amount": 25680
+      },
+      {
+        "id": "si-004",
+        "itemNo": "YF202501001",
+        "itemDate": "2025-01-17",
+        "type": "sale",
+        "description": "运费",
+        "amount": 320
+      }
+    ],
+    "differenceAmount": 320,
+    "status": "disputed",
+    "supplierConfirmed": true,
+    "supplierConfirmedAt": "2025-01-17T10:00:00Z",
+    "buyerConfirmed": false,
+    "disputeReason": "供应商多计运费320元，我方合同约定运费由供应商承担，需核实",
+    "createdAt": "2025-01-17T08:00:00Z",
+    "updatedAt": "2025-01-17T14:00:00Z"
+  },
+  {
+    "id": "stmt-005",
+    "statementNo": "DZ202501005",
+    "supplierId": "sup-002",
+    "supplierName": "上海宏图科技股份有限公司",
+    "periodStart": "2025-01-16",
+    "periodEnd": "2025-01-18",
+    "purchaseRecordIds": [
+      "pr-007"
+    ],
+    "totalPurchaseAmount": 45200,
+    "totalReturnAmount": 0,
+    "netAmount": 45200,
+    "supplierAmount": 45200,
+    "supplierItems": [
+      {
+        "id": "si-005",
+        "itemNo": "XS202501003",
+        "itemDate": "2025-01-16",
+        "type": "sale",
+        "description": "服务器设备销售",
+        "amount": 45200
+      }
+    ],
+    "differenceAmount": 0,
+    "status": "pending_buyer_confirm",
+    "supplierConfirmed": true,
+    "supplierConfirmedAt": "2025-01-17T11:00:00Z",
+    "buyerConfirmed": false,
+    "remarks": "差异为零，等待采购方最终确认",
+    "createdAt": "2025-01-17T09:00:00Z",
+    "updatedAt": "2025-01-17T11:00:00Z"
+  }
+]
